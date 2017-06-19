@@ -1,0 +1,138 @@
+
+                FASPER RELEASE HISTORY
+______________________________________________________________________
+   Copyright (C) 2005 Amiq srl. All rights reserved.  
+
+Redistribution and use in source and binary forms, 
+with or without modification, are permitted provided 
+that the following conditions are met:
+     * Redistributions of source code must retain the above 
+       copyright notice, this list of conditions 
+       and the following disclaimer.
+     * Redistributions in binary form must reproduce the above 
+       copyright notice, this list of conditions and the following 
+       disclaimer in the documentation and/or other materials 
+       provided with the distribution.
+
+Neither the name of the AMIQ srl. nor the names of its contributors 
+may be used to endorse or promote products derived from this 
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS 
+OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND 
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+______________________________________________________________________
+
+VERSION 0.9
+
+*** NEW FEATURES
+   - all
+   - documentation
+
+*** BUG FIXES
+   - what bugs??? :))
+
+______________________________________________________________________
+
+VERSION 0.8
+
+2005-02-16, Stefan 
+     - *** COMPLETELY NEW APPROACH *** 
+     - switched to fasper contents
+     - refactored everything & made it Eclipse compliant 
+     - removed g, resources & java directories
+
+______________________________________________________________________
+
+VERSIONS PREVIOUS TO 0.8
+
+2004-09-20, Stefan
+*** *.java
+     - introduced interfaces in order to build a framework : Filter,
+         Activation, TestRunner
+     - run/load of z&e files
+     - rerun/reload of z&e files
+     - activation is default EToolActivation (for more info see 
+         fasper/resources/defs.properties)
+     - changed look&feel
+     - added comparator filters for nodes of type E_MODULE and for  
+         defines nodes
+
+2004-09-09, Stefan
+*** Tool.java
+     - added support for run using activation class
+*** TesterActivation.java
+     - activates the tester
+*** Activation.java
+     - activation interface
+*** TestParser.g
+     - added support for activation class
+*** Changed look&feel a little bit
+
+2004-09-08, Stefan
+*** JConsole.java
+     - fixed the bug by changing the implementation
+*** JStatusBar.java
+     - made the message box bigger
+*** FaspFrame.java, JTestASTPane.java
+     - added a Prefs menu; scroll syncronisation in E-R view is 
+       achieved only if the right checkbox is selected
+
+2004-09-07, Stefan
+*** JConsole.java 
+     - fixed a bug related to rerun and console
+
+2004-09-06, Stefan
+*** JASTSplitPane.java
+     - introduced a listener in order to synchronize (Horiz&Vert) 
+           scrolling in Expected-Run tab
+     - set the resize weight to 0.5 (the window is alawyse 
+           splitted in two equal parts)
+*** FaspFrame.java
+     - made buttons in toolbar highlightable
+
+2004-08-18, Stefan
+*** Tool.java
+     - modified display in debug mode : all visual components are 
+          displayed in one frame, instead of three
+     - deleted all display methods and JExpandedASTFrame from Tool.java
+     - add new class FaspFrame which is the main GUI 
+     - added 4 menu items : load (loads a test file), reload(reload the
+          last loaded file), exit(exits) and about(some help)
+     - added 2 toolbar buttons for load and reload
+     - changed the Tool.main() in order to accept starting without args 
+          (it automatically starts in debug mode if no arg is given)
+
+2004-08-17, Stefan + Cristian
+*** TestLexer.g
+     - modified STRING rule to accept '#"' & '"#' as string delimiters
+
+2004-08-03, Cristian
+*** Tool.java
+     - added support for parser constructor based on lexer class
+
+2004-07-07, Stefan
+*** TestParser.g
+     - modified rule nodeDecl : introduced parserNodeDecl and 
+treeParserNodeDecl; if they are not specified or if they are set to 
+antlr.CommonAST => antlr.CommonAST is used
+     - added rule for top file; in case it's specified it doesn't
+use the code in the file anymore
+
+2004-06-23, Stefan
+*** TestParser.g
+     - introduced rule node; it specifies the type of node 
+to use for both parser and walker (eg. `node etools.TAST`)
+*** Tool.java
+     - added node setting support for dutParser and dutTreeParser
+*** Resources
+     - changed old icons with new ones :) (gif instead of jpg)

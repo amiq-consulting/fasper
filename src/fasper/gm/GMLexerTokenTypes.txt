@@ -1,0 +1,30 @@
+// $ANTLR 2.7.5 (20050207): GMLexer.g -> GMLexerTokenTypes.txt$
+GMLexer    // output token vocab name
+START=4
+TEST_LIST=5
+TEST=6
+OUT=7
+LITERAL_dutActivationClass="dutActivationClass"=8
+ID=9
+LITERAL_argTypeAndValue="argTypeAndValue"=10
+STRING=11
+STARTGM=12
+ENDGM=13
+VLINE=14
+LBRACK=15
+COMMA=16
+RBRACK=17
+HLINE=18
+COLON=19
+EQ=20
+SEMI=21
+LCURLY=22
+RCURLY=23
+ACC=24
+SLASH=25
+WS=26
+TAB=27
+SL_COMMENT=28
+ML_COMMENT=29
+INT=30
+P_VLINE=31

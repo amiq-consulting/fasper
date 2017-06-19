@@ -1,0 +1,43 @@
+# init.init -- default settings for fasper
+
+#########
+# GUI
+#########
+HEIGHT=750
+WIDTH=750
+SYNC_SCROLL=true
+
+#########
+# FILE EXTENSIONS
+#########
+TEST_EXT=z
+DUT_EXT=e
+DEF_EXT=init
+
+#########
+# PARSER ACTIVATION & Filter
+#########
+DUT_ACTIV_CLASS=etools.test.EToolsActivation
+DUT_ACTIV_ARGS=java.lang.String
+DUT_ACTIV_VALUES=e_0.e
+FILTER=etools.test.EToolsFilter
+
+#########
+# TESTRUNNER ACTIVATION
+#########
+TR_ACTIV_CLASS=fasper.gm.GMActivation
+TR_ACTIV_ARGS=java.lang.String
+TR_ACTIV_VALUES=test_0.z
+
+#########
+# COMPARATOR
+#########
+COMP_CLASS=fasper.DefaultASTComparator
+COMP_P_W=true
+COMP_E_P=false
+
+#########
+# WRITER
+#########
+WRITER_CLASS=fasper.DefaultWriter
+

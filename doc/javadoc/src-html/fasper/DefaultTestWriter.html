@@ -1,0 +1,147 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package fasper;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import antlr.collections.AST;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.util.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.io.File;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    import fasper.base.*;<a name="line.7"></a>
+<FONT color="green">008</FONT>    <a name="line.8"></a>
+<FONT color="green">009</FONT>    /**<a name="line.9"></a>
+<FONT color="green">010</FONT>     * This is not connected yet. Will be available in the future.<a name="line.10"></a>
+<FONT color="green">011</FONT>     * More than that, it may use stringtemplates.<a name="line.11"></a>
+<FONT color="green">012</FONT>     */ <a name="line.12"></a>
+<FONT color="green">013</FONT>    public class DefaultTestWriter implements TestWriter {<a name="line.13"></a>
+<FONT color="green">014</FONT>       /**<a name="line.14"></a>
+<FONT color="green">015</FONT>        * Basic constructor.<a name="line.15"></a>
+<FONT color="green">016</FONT>        */<a name="line.16"></a>
+<FONT color="green">017</FONT>       public DefaultTestWriter() {<a name="line.17"></a>
+<FONT color="green">018</FONT>       }<a name="line.18"></a>
+<FONT color="green">019</FONT>    <a name="line.19"></a>
+<FONT color="green">020</FONT>       /**<a name="line.20"></a>
+<FONT color="green">021</FONT>        * Writes the AST tree to a file.<a name="line.21"></a>
+<FONT color="green">022</FONT>        * @param _tree The tree to save.<a name="line.22"></a>
+<FONT color="green">023</FONT>        * @param _fileName The name of the file to save to.<a name="line.23"></a>
+<FONT color="green">024</FONT>        * @throws Throws an exception related to saving process. <a name="line.24"></a>
+<FONT color="green">025</FONT>        */<a name="line.25"></a>
+<FONT color="green">026</FONT>       public void writeASTToFile(AST _tree, String _fileName) <a name="line.26"></a>
+<FONT color="green">027</FONT>          throws Throwable {<a name="line.27"></a>
+<FONT color="green">028</FONT>          <a name="line.28"></a>
+<FONT color="green">029</FONT>       }<a name="line.29"></a>
+<FONT color="green">030</FONT>    <a name="line.30"></a>
+<FONT color="green">031</FONT>       void saveTest(File _file) throws Throwable {<a name="line.31"></a>
+<FONT color="green">032</FONT>    //       AST _ast = getVerifiedAST();<a name="line.32"></a>
+<FONT color="green">033</FONT>    //       if (_ast == null) {<a name="line.33"></a>
+<FONT color="green">034</FONT>    //          Utils.log("Cannot save to file : AST is null");<a name="line.34"></a>
+<FONT color="green">035</FONT>    //          return;<a name="line.35"></a>
+<FONT color="green">036</FONT>    //       }<a name="line.36"></a>
+<FONT color="green">037</FONT>    //       Utils.log("Saving activation . . .");<a name="line.37"></a>
+<FONT color="green">038</FONT>    //       StringBuffer _sb = new StringBuffer(parserActiv.toZString());<a name="line.38"></a>
+<FONT color="green">039</FONT>    //       _sb.append("--&gt;\n");<a name="line.39"></a>
+<FONT color="green">040</FONT>    //       Utils.log("Saving tree . . .");<a name="line.40"></a>
+<FONT color="green">041</FONT>    //       printAST(_ast, 0, _sb);<a name="line.41"></a>
+<FONT color="green">042</FONT>    //       _sb.append("===");<a name="line.42"></a>
+<FONT color="green">043</FONT>    //       try {<a name="line.43"></a>
+<FONT color="green">044</FONT>    //          BufferedWriter w = new BufferedWriter(new FileWriter(_file));<a name="line.44"></a>
+<FONT color="green">045</FONT>    //          w.write(_sb.toString());<a name="line.45"></a>
+<FONT color="green">046</FONT>    //          w.flush();<a name="line.46"></a>
+<FONT color="green">047</FONT>    //          w.close();<a name="line.47"></a>
+<FONT color="green">048</FONT>    //       } catch (IOException _ioe) {<a name="line.48"></a>
+<FONT color="green">049</FONT>    //          throw new FasperException("UNABLE_TO_SAVE_TEST"<a name="line.49"></a>
+<FONT color="green">050</FONT>    //             , "Unable to save test to file :" + _file.getAbsolutePath()<a name="line.50"></a>
+<FONT color="green">051</FONT>    //             , _ioe);<a name="line.51"></a>
+<FONT color="green">052</FONT>    //       }<a name="line.52"></a>
+<FONT color="green">053</FONT>       }<a name="line.53"></a>
+<FONT color="green">054</FONT>    <a name="line.54"></a>
+<FONT color="green">055</FONT>       private void printAST(AST _tree, int _depth, StringBuffer _sb) {<a name="line.55"></a>
+<FONT color="green">056</FONT>    //       String _str = _tree.getText();<a name="line.56"></a>
+<FONT color="green">057</FONT>    //       if (_str.endsWith(" - ok") || _str.endsWith(" - ko"))<a name="line.57"></a>
+<FONT color="green">058</FONT>    //          _str = _str.substring(0, _str.length() - 5);<a name="line.58"></a>
+<FONT color="green">059</FONT>    //       _sb.append(getIndent(_depth) + "[" + <a name="line.59"></a>
+<FONT color="green">060</FONT>    //          (String)tokenMap.get(new Integer(_tree.getType())) <a name="line.60"></a>
+<FONT color="green">061</FONT>    //          + ", #\"" + _str + "\"#]\n"); <a name="line.61"></a>
+<FONT color="green">062</FONT>    //       if (_tree.getFirstChild() != null)<a name="line.62"></a>
+<FONT color="green">063</FONT>    //          printAST(_tree.getFirstChild(), _depth + 1, _sb);<a name="line.63"></a>
+<FONT color="green">064</FONT>    //       if (_tree.getNextSibling() != null)<a name="line.64"></a>
+<FONT color="green">065</FONT>    //          printAST(_tree.getNextSibling(), _depth, _sb);<a name="line.65"></a>
+<FONT color="green">066</FONT>       }<a name="line.66"></a>
+<FONT color="green">067</FONT>    <a name="line.67"></a>
+<FONT color="green">068</FONT>       private String getIndent(int _k) {<a name="line.68"></a>
+<FONT color="green">069</FONT>          return "";<a name="line.69"></a>
+<FONT color="green">070</FONT>    //       if (_k == 0)<a name="line.70"></a>
+<FONT color="green">071</FONT>    //          return "";<a name="line.71"></a>
+<FONT color="green">072</FONT>    //       String _res = "";<a name="line.72"></a>
+<FONT color="green">073</FONT>    //       for (int _i = 0; _i &lt; _k ; _i++ ) {<a name="line.73"></a>
+<FONT color="green">074</FONT>    //          if (_i != _k - 1)<a name="line.74"></a>
+<FONT color="green">075</FONT>    //             _res = _res + "|  ";<a name="line.75"></a>
+<FONT color="green">076</FONT>    //          else<a name="line.76"></a>
+<FONT color="green">077</FONT>    //             _res = _res + "|--";<a name="line.77"></a>
+<FONT color="green">078</FONT>    //       }<a name="line.78"></a>
+<FONT color="green">079</FONT>    //       return _res;<a name="line.79"></a>
+<FONT color="green">080</FONT>       }<a name="line.80"></a>
+<FONT color="green">081</FONT>    }<a name="line.81"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

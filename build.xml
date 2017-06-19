@@ -1,0 +1,165 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!--
+  Project        : FASPER
+  Base directory : fasper
+  Default task   : compile
+  Properties     : build.properties
+-->
+<project name="fasper" basedir="." default="compile">
+
+   <!-- Load properties file -->
+   <loadproperties srcFile="build.properties"/>
+   
+   <!-- Computes the name of the release -->
+   <property name="installNamePty" value="fasper-${releasePty}"/>
+
+   <!-- Generate GMLexer : default implementation of the golden model lexer -->
+   <target name="genGMLexer">
+      <antlr target="src/g/GMLexer.g" outputdirectory="src/fasper/gm" traceLexer="${antlrTracePty}" debug="${antlrDebugPty}">
+      </antlr>
+   </target>
+
+   <!-- Generate GMParser : default implementation of the golden model parser -->
+   <target name="genGMParser">
+      <antlr target="src/g/GMParser.g" outputdirectory="src/fasper/gm" traceParser="${antlrTracePty}" debug="${antlrDebugPty}">
+      </antlr>
+   </target>
+
+   <!-- Compile java sources -->
+   <target name="compile">
+      <javac destdir="build" source="1.5">
+         <src path="." />
+         <include name="build/g_src/**" />
+         <include name="src/fasper/**" />
+      </javac>
+   </target>
+
+   <!-- All :
+      - cleans removes old stuff
+      - generates new golden model parser
+      - compiles java sources 
+      - copy resources to build directory
+   -->
+   <target name="all" depends="clean, genGMParser, genGMLexer, compile">
+      <copy todir="build/fasper/resources">
+         <fileset dir="src/fasper/resources" />
+      </copy>
+   </target>
+
+   <!-- Make the jar -->
+   <target name="jar">
+      <jar basedir="build" destfile="fasper.jar" index="${indexPty}" compress="${compressPty}">
+         <manifest>
+            <attribute name="Main-Class" value="${MainClassPty}" />
+            <attribute name="Specification-Title" value="${SpecificationTitlePty}" />
+            <attribute name="Specification-Version" value="${SpecificationVersionPty}" />
+            <attribute name="Specification-Vendor" value="${SpecificationVendorPty}" />
+            <attribute name="Implementation-Title" value="${ImplementationTitlePty}" />
+            <attribute name="Implementation-Version" value="${releasePty}" />
+            <attribute name="Implementation-Vendor" value="${ImplementationVendorPty}" />
+            <attribute name="Implementation-Vendor-Contact" value="${ImplementationVendorContactPty}" />
+            <attribute name="Copyright" value="${CopyrightPty}" />
+            <section name="fasper">
+               <attribute name="Sealed" value="${SealedPty}" />
+               <attribute name="Built-By" value="${user.name}" />
+               <attribute name="Built-Date" value="${datePty}" />
+               <attribute name="OS" value="${os.name}_${os.version}_${os.arch}" />
+               <attribute name="JRE-Version" value="${java.version}" />
+            </section>
+         </manifest>
+      </jar>
+   </target>
+
+   <!-- Creates build & dist directories -->
+   <target name="directories">
+      <mkdir dir="build"/>
+      <mkdir dir="dist"/>
+   </target>
+
+   <!-- Clean !-->
+   <target name="clean">
+      <delete dir="build/fasper" verbose="${deleteVerbosePty}"/>
+      <delete verbose="${deleteVerbosePty}">
+         <fileset dir="build" includes="*" />
+         <fileset dir="src/fasper/gm" includes="GMLexer*"/>
+         <fileset dir="src/fasper/gm" includes="GMParser*"/>
+      </delete>
+      <mkdir dir="build/fasper"/>
+   </target>
+
+   <!-- Generates documentation -->
+   <target name="doc" depends="all">
+        <delete dir="doc/javadoc" verbose="${deleteVerbosePty}"/>
+        <javadoc destdir="doc/javadoc" 
+                 access="package" 
+                 source="1.5" 
+                 use="true" 
+                 notree="false" 
+                 nonavbar="false" 
+                 noindex="false" 
+                 splitindex="true" 
+                 author="true" 
+                 version="true" 
+                 nodeprecatedlist="false" 
+                 nodeprecated="false" 
+                 packagenames="fasper.base,fasper.gui,fasper,fasper.gm,fasper.test" 
+                 sourcepath="src" 
+                 classpath="build:${antlrJarPty}:${junitJarPty}" 
+                 doctitle="Fasper - Parser Tester" 
+                 additionalparam="-J-Xmx200m " 
+                 linksource="yes">
+         <link offline="false" href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+         <link offline="false" href="http://www.antlr.org/javadoc/"/>
+        </javadoc>
+    </target>
+
+    <!-- Zip the whole project as it is -->
+    <target name="full" depends="all,jar,doc">
+        <copy todir="dist/${installNamePty}/fasper" overwrite="true">
+           <fileset dir="${basedir}" includes="fasper.jar"/>
+           <fileset dir="${basedir}" includes="*.txt"/>
+           <fileset dir="${basedir}" includes="build.*"/>
+        </copy>
+        <copy todir="dist/${installNamePty}/fasper/build" overwrite="true">
+           <fileset dir="build" defaultexcludes="yes" includes="**/*"/>
+        </copy>
+        <copy todir="dist/${installNamePty}/fasper/doc" overwrite="true">
+           <fileset dir="doc" defaultexcludes="yes" includes="**/*"/>
+        </copy>
+        <copy todir="dist/${installNamePty}/fasper/src" overwrite="true">
+           <fileset dir="src" defaultexcludes="yes" includes="**/*"/>
+        </copy>
+        <copy todir="dist/${installNamePty}/fasper/external" overwrite="true">
+           <fileset dir="external" defaultexcludes="yes" includes="**/*"/>
+        </copy>
+        <zip destfile="dist/${installNamePty}-src.zip" basedir="dist/${installNamePty}"/>
+        <delete dir="dist/${installNamePty}" verbose="${deleteVerbosePty}"/>
+    </target>
+
+    <!-- Zip a lite version : 
+       - includes : fasper.jar, external and doc (only pdf & javadoc)
+       - excludes sources, build related stuff
+    -->
+    <target name="lite" depends="all,jar,doc">
+        <copy todir="dist/${installNamePty}/fasper" overwrite="true">
+           <fileset dir="${basedir}" includes="*.txt"/>
+        </copy>
+        <copy todir="dist/${installNamePty}/fasper/doc" overwrite="true">
+           <fileset dir="doc" defaultexcludes="yes" includes="**/*.pdf"/>
+        </copy>
+        <copy todir="dist/${installNamePty}/fasper/doc/javadoc" overwrite="true">
+           <fileset dir="doc/javadoc" defaultexcludes="yes" includes="**/*"/>
+        </copy>
+        <copy todir="dist/${installNamePty}/fasper/lib" overwrite="true">
+           <fileset dir="external" defaultexcludes="yes" includes="**/*"/>
+           <fileset dir="${basedir}" includes="fasper.jar"/>
+        </copy>
+        <zip destfile="dist/${installNamePty}.zip" basedir="dist/${installNamePty}"/>
+        <delete dir="dist/${installNamePty}" verbose="${deleteVerbosePty}"/>
+    </target>
+
+</project>
+
+
+
+

@@ -1,0 +1,118 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    // $ANTLR 2.7.5 (20050207): "GMParser.g" -&gt; "GMParser.java"$<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    package fasper.gm;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import antlr.collections.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import antlr.*;    <a name="line.5"></a>
+<FONT color="green">006</FONT>    import java.util.*;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import java.lang.reflect.*;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import java.io.*;<a name="line.8"></a>
+<FONT color="green">009</FONT>    /**<a name="line.9"></a>
+<FONT color="green">010</FONT>     * GMParser is used for parsing the test files. The role of a test file is to <a name="line.10"></a>
+<FONT color="green">011</FONT>     * keep golden model (expected tree) &amp; activation in one place.<a name="line.11"></a>
+<FONT color="green">012</FONT>     * In this case a test file has next format:<a name="line.12"></a>
+<FONT color="green">013</FONT>     &lt;code&gt;<a name="line.13"></a>
+<FONT color="green">014</FONT>    dutActivationClass myparser.MyParserActivation&lt;br&gt;<a name="line.14"></a>
+<FONT color="green">015</FONT>    argTypeAndValue java.lang.String #"e_0.e"#&lt;br&gt;<a name="line.15"></a>
+<FONT color="green">016</FONT>    --&gt;&lt;br&gt;<a name="line.16"></a>
+<FONT color="green">017</FONT>    [C_PROGRAM, #"top: a_c.c"#]&lt;br&gt;<a name="line.17"></a>
+<FONT color="green">018</FONT>    |--[C_MODULE, #"module: a_c.c"#]&lt;br&gt;<a name="line.18"></a>
+<FONT color="green">019</FONT>    |  |  |--[LITERAL_struct, #"struct"#]&lt;br&gt;<a name="line.19"></a>
+<FONT color="green">020</FONT>    |  |  |  |--[ID, #"s_1"#]&lt;br&gt;<a name="line.20"></a>
+<FONT color="green">021</FONT>    |  |  |--[LITERAL_struct, #"struct"#]&lt;br&gt;<a name="line.21"></a>
+<FONT color="green">022</FONT>    |  |  |  |--[ID, #"s_2"#]&lt;br&gt;<a name="line.22"></a>
+<FONT color="green">023</FONT>     &lt;/code&gt;<a name="line.23"></a>
+<FONT color="green">024</FONT>     On the short :&lt;br&gt;<a name="line.24"></a>
+<FONT color="green">025</FONT>     - strings are enclosed in &lt;b&gt;#"&lt;/b&gt;&lt;i&gt;a_string&lt;/i&gt;&lt;b&gt;"#&lt;/b&gt;&lt;br&gt;<a name="line.25"></a>
+<FONT color="green">026</FONT>     - &lt;b&gt;dutActivationClass&lt;/b&gt; : activates the parser under test. This class must <a name="line.26"></a>
+<FONT color="green">027</FONT>     implement fasper.base.Activation&lt;br&gt;<a name="line.27"></a>
+<FONT color="green">028</FONT>     - &lt;b&gt;argTypeAndValue&lt;/b&gt; : pair type-value. The type must be used with <a name="line.28"></a>
+<FONT color="green">029</FONT>     full path eg. java.lang.String.&lt;br&gt;<a name="line.29"></a>
+<FONT color="green">030</FONT>       As you can see the structure of the golden model tree is very similar to &lt;br&gt;<a name="line.30"></a>
+<FONT color="green">031</FONT>    the one displayed by the ASTFrame.<a name="line.31"></a>
+<FONT color="green">032</FONT>     * @author stefan@amiq.ro<a name="line.32"></a>
+<FONT color="green">033</FONT>     */<a name="line.33"></a>
+<FONT color="green">034</FONT>    <a name="line.34"></a>
+<FONT color="green">035</FONT>    public interface GMParserTokenTypes {<a name="line.35"></a>
+<FONT color="green">036</FONT>            int EOF = 1;<a name="line.36"></a>
+<FONT color="green">037</FONT>            int NULL_TREE_LOOKAHEAD = 3;<a name="line.37"></a>
+<FONT color="green">038</FONT>            int START = 4;<a name="line.38"></a>
+<FONT color="green">039</FONT>            int TEST_LIST = 5;<a name="line.39"></a>
+<FONT color="green">040</FONT>            int TEST = 6;<a name="line.40"></a>
+<FONT color="green">041</FONT>            int OUT = 7;<a name="line.41"></a>
+<FONT color="green">042</FONT>            int LITERAL_dutActivationClass = 8;<a name="line.42"></a>
+<FONT color="green">043</FONT>            int ID = 9;<a name="line.43"></a>
+<FONT color="green">044</FONT>            int LITERAL_argTypeAndValue = 10;<a name="line.44"></a>
+<FONT color="green">045</FONT>            int STRING = 11;<a name="line.45"></a>
+<FONT color="green">046</FONT>            int STARTGM = 12;<a name="line.46"></a>
+<FONT color="green">047</FONT>            int ENDGM = 13;<a name="line.47"></a>
+<FONT color="green">048</FONT>            int VLINE = 14;<a name="line.48"></a>
+<FONT color="green">049</FONT>            int LBRACK = 15;<a name="line.49"></a>
+<FONT color="green">050</FONT>            int COMMA = 16;<a name="line.50"></a>
+<FONT color="green">051</FONT>            int RBRACK = 17;<a name="line.51"></a>
+<FONT color="green">052</FONT>    }<a name="line.52"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

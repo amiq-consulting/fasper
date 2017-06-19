@@ -1,0 +1,108 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package fasper.gui;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import javax.swing.*;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import fasper.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    class ViewsPanel extends JTabbedPane {<a name="line.7"></a>
+<FONT color="green">008</FONT>       private SourceViewer source = new SourceViewer();<a name="line.8"></a>
+<FONT color="green">009</FONT>       private ASTSplitPanel erPanel = new ASTSplitPanel();<a name="line.9"></a>
+<FONT color="green">010</FONT>       private ASTSplitPanel pwPanel = new ASTSplitPanel();<a name="line.10"></a>
+<FONT color="green">011</FONT>       private ModelHub model;<a name="line.11"></a>
+<FONT color="green">012</FONT>       <a name="line.12"></a>
+<FONT color="green">013</FONT>       ViewsPanel(ModelHub _model) {<a name="line.13"></a>
+<FONT color="green">014</FONT>          super();<a name="line.14"></a>
+<FONT color="green">015</FONT>          this.model = _model;<a name="line.15"></a>
+<FONT color="green">016</FONT>          model.setViews(this);<a name="line.16"></a>
+<FONT color="green">017</FONT>          erPanel.setLeftAST("Expected AST", new ASTPanel(erPanel));<a name="line.17"></a>
+<FONT color="green">018</FONT>          erPanel.setRightAST("Resulted AST", new ASTPanel(erPanel));<a name="line.18"></a>
+<FONT color="green">019</FONT>          pwPanel.setLeftAST("Parser AST", new ASTPanel(pwPanel));<a name="line.19"></a>
+<FONT color="green">020</FONT>          pwPanel.setRightAST("TreeParser AST", new ASTPanel(pwPanel));<a name="line.20"></a>
+<FONT color="green">021</FONT>          addTab("E-R AST"<a name="line.21"></a>
+<FONT color="green">022</FONT>             , Util.getImageIcon("resources/e_r_ast.gif")<a name="line.22"></a>
+<FONT color="green">023</FONT>             , erPanel <a name="line.23"></a>
+<FONT color="green">024</FONT>             ,  "Show Expected and Resulted ASTs");<a name="line.24"></a>
+<FONT color="green">025</FONT>          addTab("P-W AST"<a name="line.25"></a>
+<FONT color="green">026</FONT>             , Util.getImageIcon("resources/p_w_ast.gif")<a name="line.26"></a>
+<FONT color="green">027</FONT>             , pwPanel<a name="line.27"></a>
+<FONT color="green">028</FONT>             , "Shows Parser and TreeParser ASTs");<a name="line.28"></a>
+<FONT color="green">029</FONT>          addTab("Source"<a name="line.29"></a>
+<FONT color="green">030</FONT>             , Util.getImageIcon("resources/source.gif")<a name="line.30"></a>
+<FONT color="green">031</FONT>             , source.getViewer()<a name="line.31"></a>
+<FONT color="green">032</FONT>             , "Shows Source File");<a name="line.32"></a>
+<FONT color="green">033</FONT>       }<a name="line.33"></a>
+<FONT color="green">034</FONT>       <a name="line.34"></a>
+<FONT color="green">035</FONT>       void refresh()  {<a name="line.35"></a>
+<FONT color="green">036</FONT>          erPanel.refresh(model.getTool().getExpectedAST()<a name="line.36"></a>
+<FONT color="green">037</FONT>             , model.getTool().getVerifiedAST());<a name="line.37"></a>
+<FONT color="green">038</FONT>          pwPanel.refresh(model.getTool().getParserAST()<a name="line.38"></a>
+<FONT color="green">039</FONT>             , model.getTool().getTreeParserAST());<a name="line.39"></a>
+<FONT color="green">040</FONT>          source.refresh(model.lastFile);<a name="line.40"></a>
+<FONT color="green">041</FONT>       }<a name="line.41"></a>
+<FONT color="green">042</FONT>    }<a name="line.42"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

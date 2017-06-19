@@ -1,0 +1,19 @@
+
+             *** FASPER FUTURE ENHANCEMENTS PREVIEW ***
+
+_______________________________________________________________________________
+
+FASPER FRAMEWORK
+  - use DefaultTestWriter for writting tests or stringtemplate.
+  - change plug-in specification format (or enhance it)
+  - integrate with antlrWorks?
+
+FASPER GUI
+  - "go to error" in AST view
+_______________________________________________________________________________
+
+REQUESTS FOR ENHANCEMENT
+
+   Please send any requests for enhancement at : stefan@amiq.ro
+
+

@@ -1,0 +1,183 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package fasper;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.io.*;<a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import fasper.base.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    <a name="line.6"></a>
+<FONT color="green">007</FONT>    import antlr.collections.*;<a name="line.7"></a>
+<FONT color="green">008</FONT>    <a name="line.8"></a>
+<FONT color="green">009</FONT>    /**<a name="line.9"></a>
+<FONT color="green">010</FONT>     * A proxy for the Central class.<a name="line.10"></a>
+<FONT color="green">011</FONT>     * This class should be used in tests.<a name="line.11"></a>
+<FONT color="green">012</FONT>     */<a name="line.12"></a>
+<FONT color="green">013</FONT>    public class Tool {<a name="line.13"></a>
+<FONT color="green">014</FONT>       private Defs defs = Defs.getMe();<a name="line.14"></a>
+<FONT color="green">015</FONT>       private Central central = new Central();<a name="line.15"></a>
+<FONT color="green">016</FONT>       <a name="line.16"></a>
+<FONT color="green">017</FONT>       /**<a name="line.17"></a>
+<FONT color="green">018</FONT>        * A basic constructor.<a name="line.18"></a>
+<FONT color="green">019</FONT>        */<a name="line.19"></a>
+<FONT color="green">020</FONT>       public Tool() {<a name="line.20"></a>
+<FONT color="green">021</FONT>       }<a name="line.21"></a>
+<FONT color="green">022</FONT>       <a name="line.22"></a>
+<FONT color="green">023</FONT>       /**<a name="line.23"></a>
+<FONT color="green">024</FONT>        * Loads a source or test file.<a name="line.24"></a>
+<FONT color="green">025</FONT>        * @param _file A source or test file.<a name="line.25"></a>
+<FONT color="green">026</FONT>        * @throws Throwable is thrown if errors occured during <a name="line.26"></a>
+<FONT color="green">027</FONT>        * load process<a name="line.27"></a>
+<FONT color="green">028</FONT>        */<a name="line.28"></a>
+<FONT color="green">029</FONT>       public void load(File _file) throws Throwable {<a name="line.29"></a>
+<FONT color="green">030</FONT>          if (_file == null)<a name="line.30"></a>
+<FONT color="green">031</FONT>             throw new FasperException("FILE_IS_NULL"<a name="line.31"></a>
+<FONT color="green">032</FONT>                , "The file you are tring to load is null");<a name="line.32"></a>
+<FONT color="green">033</FONT>          if (_file.getName().endsWith(defs.TEST_EXT))<a name="line.33"></a>
+<FONT color="green">034</FONT>             central.loadTest(_file);<a name="line.34"></a>
+<FONT color="green">035</FONT>          else<a name="line.35"></a>
+<FONT color="green">036</FONT>             central.loadFile(_file);<a name="line.36"></a>
+<FONT color="green">037</FONT>       }<a name="line.37"></a>
+<FONT color="green">038</FONT>       <a name="line.38"></a>
+<FONT color="green">039</FONT>       /**<a name="line.39"></a>
+<FONT color="green">040</FONT>        * Loads a source or test file.<a name="line.40"></a>
+<FONT color="green">041</FONT>        * @param _file is the name of the file to be loaded<a name="line.41"></a>
+<FONT color="green">042</FONT>        * @throws Throwable is thrown if errors occured during <a name="line.42"></a>
+<FONT color="green">043</FONT>        * load process<a name="line.43"></a>
+<FONT color="green">044</FONT>        */<a name="line.44"></a>
+<FONT color="green">045</FONT>       public void load(String _file) throws Throwable {<a name="line.45"></a>
+<FONT color="green">046</FONT>          this.load(new File(_file));<a name="line.46"></a>
+<FONT color="green">047</FONT>       }<a name="line.47"></a>
+<FONT color="green">048</FONT>       <a name="line.48"></a>
+<FONT color="green">049</FONT>       /**<a name="line.49"></a>
+<FONT color="green">050</FONT>        * Loads a default values file.<a name="line.50"></a>
+<FONT color="green">051</FONT>        * @param _file the default values file.<a name="line.51"></a>
+<FONT color="green">052</FONT>        * @see fasper.Defs<a name="line.52"></a>
+<FONT color="green">053</FONT>        * @throws Throwable throws an Exception if could not load<a name="line.53"></a>
+<FONT color="green">054</FONT>        * defaults<a name="line.54"></a>
+<FONT color="green">055</FONT>        */<a name="line.55"></a>
+<FONT color="green">056</FONT>       public void loadDefaults(String _file) throws Throwable {<a name="line.56"></a>
+<FONT color="green">057</FONT>          central.loadDefaults(_file);<a name="line.57"></a>
+<FONT color="green">058</FONT>       }<a name="line.58"></a>
+<FONT color="green">059</FONT>       <a name="line.59"></a>
+<FONT color="green">060</FONT>       /**<a name="line.60"></a>
+<FONT color="green">061</FONT>        * Saves the current verifies AST in z-file<a name="line.61"></a>
+<FONT color="green">062</FONT>        * @param _file the z-file.<a name="line.62"></a>
+<FONT color="green">063</FONT>        * @throws Throwable throws an Exception if couldn't save <a name="line.63"></a>
+<FONT color="green">064</FONT>        * the test.<a name="line.64"></a>
+<FONT color="green">065</FONT>        */<a name="line.65"></a>
+<FONT color="green">066</FONT>       public void saveTest(File _file) throws Throwable {<a name="line.66"></a>
+<FONT color="green">067</FONT>          central.saveTest(_file);<a name="line.67"></a>
+<FONT color="green">068</FONT>       }<a name="line.68"></a>
+<FONT color="green">069</FONT>       <a name="line.69"></a>
+<FONT color="green">070</FONT>       /**<a name="line.70"></a>
+<FONT color="green">071</FONT>        * Sets the AST filter class name (eg. woo.test.WooFilter)<a name="line.71"></a>
+<FONT color="green">072</FONT>        * @param _filt<a name="line.72"></a>
+<FONT color="green">073</FONT>        */<a name="line.73"></a>
+<FONT color="green">074</FONT>       public void setFilter(String _filt) {<a name="line.74"></a>
+<FONT color="green">075</FONT>          defs.FILTER = _filt;<a name="line.75"></a>
+<FONT color="green">076</FONT>       }<a name="line.76"></a>
+<FONT color="green">077</FONT>       <a name="line.77"></a>
+<FONT color="green">078</FONT>       /**<a name="line.78"></a>
+<FONT color="green">079</FONT>        * Sets the comparator class name (eg. woo.test.WooComparator)<a name="line.79"></a>
+<FONT color="green">080</FONT>        * @param _comp the name of the comparator class<a name="line.80"></a>
+<FONT color="green">081</FONT>        */<a name="line.81"></a>
+<FONT color="green">082</FONT>       public void setComparator(String _comp) {<a name="line.82"></a>
+<FONT color="green">083</FONT>          defs.COMP_CLASS = _comp;<a name="line.83"></a>
+<FONT color="green">084</FONT>       }<a name="line.84"></a>
+<FONT color="green">085</FONT>       <a name="line.85"></a>
+<FONT color="green">086</FONT>       /**<a name="line.86"></a>
+<FONT color="green">087</FONT>        * Returns current expected AST or null if there isn't one.<a name="line.87"></a>
+<FONT color="green">088</FONT>        * @return AST current expected AST<a name="line.88"></a>
+<FONT color="green">089</FONT>        */<a name="line.89"></a>
+<FONT color="green">090</FONT>       public AST getExpectedAST() {<a name="line.90"></a>
+<FONT color="green">091</FONT>          return central.getExpectedAST();<a name="line.91"></a>
+<FONT color="green">092</FONT>       }<a name="line.92"></a>
+<FONT color="green">093</FONT>       <a name="line.93"></a>
+<FONT color="green">094</FONT>       /**<a name="line.94"></a>
+<FONT color="green">095</FONT>        * Returns current parser AST or null if there isn't one.<a name="line.95"></a>
+<FONT color="green">096</FONT>        * @return AST current parser AST<a name="line.96"></a>
+<FONT color="green">097</FONT>        */<a name="line.97"></a>
+<FONT color="green">098</FONT>       public AST getParserAST() {<a name="line.98"></a>
+<FONT color="green">099</FONT>          return central.getParserAST();<a name="line.99"></a>
+<FONT color="green">100</FONT>       }<a name="line.100"></a>
+<FONT color="green">101</FONT>       <a name="line.101"></a>
+<FONT color="green">102</FONT>       /**<a name="line.102"></a>
+<FONT color="green">103</FONT>        * Returns current treeParser AST or null if there isn't one.<a name="line.103"></a>
+<FONT color="green">104</FONT>        * @return AST current treeParser AST<a name="line.104"></a>
+<FONT color="green">105</FONT>        */<a name="line.105"></a>
+<FONT color="green">106</FONT>       public AST getTreeParserAST() {<a name="line.106"></a>
+<FONT color="green">107</FONT>          return central.getTreeParserAST();<a name="line.107"></a>
+<FONT color="green">108</FONT>       }<a name="line.108"></a>
+<FONT color="green">109</FONT>       <a name="line.109"></a>
+<FONT color="green">110</FONT>       /**<a name="line.110"></a>
+<FONT color="green">111</FONT>        * <a name="line.111"></a>
+<FONT color="green">112</FONT>        * @return AST currently verified AST<a name="line.112"></a>
+<FONT color="green">113</FONT>        */<a name="line.113"></a>
+<FONT color="green">114</FONT>       public AST getVerifiedAST() {<a name="line.114"></a>
+<FONT color="green">115</FONT>          return central.getVerifiedAST();<a name="line.115"></a>
+<FONT color="green">116</FONT>       }   <a name="line.116"></a>
+<FONT color="green">117</FONT>    }<a name="line.117"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>
